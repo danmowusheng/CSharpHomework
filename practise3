@@ -1,0 +1,51 @@
+using System;
+
+namespace practise3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //用“埃氏筛法”求2~100以内的素数。2~100以内的数，先去掉2的倍数，再去掉3的倍数，
+            //再去掉4的倍数，以此类推...最后剩下的就是素数。
+
+            //该题最重要的是避免重复比较一个数，或者说已经被抛弃的数不应该再次被使用
+            //设想利用一个匹配的bool数组来标记2-100中的非素数
+
+            int[] num = new int[99];
+            //首先用一个数组储存这些数
+            for(int i = 2; i < 100; i++)
+            {
+                num[i - 2] = i;
+            }
+
+            //num数组中的每个数初始设置为false
+            bool[] flag = new bool[99];
+            for (int i = 0; i < 99; i++)
+            {
+                flag[i] = false;
+            }
+            //除数从2开始，直到50以后，再没有除本身以外的倍数了
+            for(int i = 2; i < 50; i++)
+            {
+                for(int j = 0; j < 99; j++)
+                {
+                    //如果这个数可以被i整除，并且对应的flag为false，则修正flag为true
+                    //表示该数不为素数
+                    if (num[j] % i == 0 && num[j]!=i)
+                    {
+                        flag[j] = true;
+                    }
+                }
+            }
+
+            for(int i = 0; i < 99; i++)
+            {
+                if (!flag[i])
+                {
+                    Console.Write(num[i] + " ");
+                }
+            }
+        }
+    }
+}
