@@ -1,0 +1,66 @@
+using System;
+
+namespace Practise2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Program p = new Program();
+            //求数组的最大值，最小值，平均值，所有数组数值之和
+            Console.WriteLine("请输入数组的大小（n）：");
+            int n = Convert.ToInt32(Console.ReadLine());
+            int[] num = new int[n];
+            //将数组读入
+            for(int i = 0; i < n; i++)
+            {
+                num[i] = Convert.ToInt32(Console.ReadLine());
+            }
+
+            //依次将结果输出
+            Console.WriteLine(p.Max(num, n) + " " + p.Min(num, n)+ " " + p.Sum(num, n)+" " + (double)(p.Sum(num, n))/n);
+        }
+
+        public int Max(int[] num, int n)
+        {
+            int max=0;
+            for(int i = 0; i < n-1; i++)
+            {
+                max = num[i];
+                if (num[i] < num[i + 1])
+                {
+                    max = num[i + 1];
+                }       
+            }
+            return max;
+        }
+
+        public int Min(int[] num, int n)
+        {
+            int min = 0;
+            for (int i = 0; i < n - 1; i++)
+            {
+                min = num[i];
+                if (num[i] > num[i + 1])
+                {
+                    min = num[i + 1];
+                }
+            }
+            return min;
+        }
+
+        public int Sum(int[] num, int n)
+        {
+            int sum = 0;
+            for(int i = 0; i < n; i++)
+            {
+                sum += num[i];
+            }
+
+            return sum;
+        }
+    }
+
+    
+}
+
